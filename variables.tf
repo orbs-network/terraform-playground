@@ -1,9 +1,9 @@
 variable "application" {
-  default = "plauground"
+  default = "playground"
 }
 
 variable "provisionersrc" {
-  default = "orbs-network/terraform-plauground-node"
+  default = "orbs-network/terraform-playground-node"
 }
 
 variable "vpc_cidr_block" {

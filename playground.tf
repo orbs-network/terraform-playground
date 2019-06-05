@@ -1,5 +1,5 @@
 locals {
-  plauground_user_data = <<TFEOF
+  playground_user_data = <<TFEOF
 #! /bin/bash
 
 apt-get update
@@ -103,19 +103,19 @@ EOF
 TFEOF
 }
 
-resource "aws_instance" "plauground" {
+resource "aws_instance" "playground" {
   ami               = "${data.aws_ami.ubuntu-18_04.id}"
   count             = 1
   instance_type     = "${var.instance_type}"
 
   # This machine type is chosen since we need at least 16GB of RAM for mainnet
   # and sufficent amount of networking capabilities
-  security_groups = ["${aws_security_group.plauground.id}"]
+  security_groups = ["${aws_security_group.playground.id}"]
 
   key_name  = "${aws_key_pair.deployer.key_name}"
   subnet_id = "${ module.vpc.subnet-ids-public[0] }"
 
-  user_data = "${local.plauground_user_data}"
+  user_data = "${local.playground_user_data}"
 
   connection {
     type        = "ssh"
@@ -124,6 +124,6 @@ resource "aws_instance" "plauground" {
   }
 
   tags = {
-    Name = "plauground-${count.index+1}"
+    Name = "playground-${count.index+1}"
   }
 }

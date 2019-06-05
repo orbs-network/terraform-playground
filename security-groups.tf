@@ -1,6 +1,6 @@
 /* Default security group */
-resource "aws_security_group" "plauground" {
-  name        = "plauground-sg"
+resource "aws_security_group" "playground" {
+  name        = "playground-sg"
   vpc_id      = "${ module.vpc.id }"
 
   ingress {
